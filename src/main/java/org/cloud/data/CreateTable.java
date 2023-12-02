@@ -36,7 +36,7 @@ public class CreateTable {
         nums.add(RowFactory.create(1695115999911L,"c8abbe79-8d89-47ea-b4ce-4d224bae5bfa","rider-J","driver-T",20.85,"chennai"));
 
         Dataset<Row> dataset = spark.createDataFrame(nums, structType);
-        dataset.write().mode(SaveMode.Overwrite).format("delta")
+        dataset.write().mode(SaveMode.Overwrite).format("delta").partitionBy("city")
                 .option("overwriteSchema", "true").save("file:///D:/sparksetup/iceberg/spark_warehouse/trips_delta");
 
     }
